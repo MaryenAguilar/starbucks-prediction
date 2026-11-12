@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+kagglehub
+matplotlib
+numpy
+pandas
+scikit-learn
+statsmodels
