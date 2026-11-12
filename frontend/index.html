@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Starbucks Predict · Tienda San Isidro</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%23cdfe6f'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <header class="top">
+      <div class="title-block">
+        <div class="eyebrow-line">
+          <p class="eyebrow">
+            <span class="dash"></span>
+            <button type="button" class="store-button" id="store-button" aria-expanded="false" aria-controls="store-menu">
+              Mañana · <span id="store-name">Tienda San Isidro</span>
+              <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.2 4.2 6 8l3.8-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+          </p>
+          <ul class="store-menu" id="store-menu" role="listbox" aria-label="Tiendas" hidden></ul>
+        </div>
+        <h1>Tu día,<br>de un vistazo.</h1>
+      </div>
+      <p class="lede">Encuentra rápidamente cuántos clientes llegarán, cuántos baristas necesitarás y qué productos debes revisar.</p>
+    </header>
+
+    <section class="metrics" aria-label="Resumen de la jornada">
+      <article class="card lime">
+        <p class="total" id="total">—</p>
+        <div class="lime-copy">
+          <p class="lime-kicker">Clientes que esperamos mañana</p>
+          <p class="lime-title">Total previsto para la jornada</p>
+          <p class="lime-note" id="total-note">Calculando la predicción SARIMAX…</p>
+        </div>
+      </article>
+
+      <article class="card dark">
+        <p class="label">Datos actualizados</p>
+        <p class="value" id="updated">—</p>
+        <p class="hint">El sistema los actualiza una vez al día.</p>
+      </article>
+
+      <article class="card dark peak-card" id="peak-card" tabindex="0" role="button" aria-label="Ver la hora con más clientes">
+        <p class="label">Hora con más clientes</p>
+        <p class="value" id="peak-slot">—</p>
+        <p class="hint" id="peak-customers">—</p>
+      </article>
+    </section>
+
+    <section class="board">
+      <article class="card panel">
+        <div class="panel-head">
+          <div>
+            <h2>¿Cuándo tendremos más clientes?</h2>
+            <p>Clientes esperados por hora</p>
+          </div>
+          <p class="live"><i></i>Se actualiza automáticamente</p>
+        </div>
+        <div class="chart-wrap">
+          <div id="chart" class="chart" tabindex="0" role="group" aria-label="Clientes esperados por hora. Usa las flechas para cambiar de franja."></div>
+          <div id="chart-tip" class="chart-tip" hidden></div>
+        </div>
+      </article>
+
+      <article class="card panel">
+        <div class="panel-head">
+          <div>
+            <h2>¿Cuántos baristas necesitamos?</h2>
+            <p>Sugerencia para cada horario</p>
+          </div>
+          <p class="live"><i></i>Confirma la disponibilidad real</p>
+        </div>
+        <div class="table-head baristas-head">
+          <span>Franja horaria</span>
+          <span>Baristas</span>
+        </div>
+        <div id="baristas" class="rows"></div>
+      </article>
+
+      <article class="card panel">
+        <div class="panel-head">
+          <div>
+            <h2>¿Qué productos debemos revisar?</h2>
+            <p>Insumos críticos incluidos en el piloto</p>
+          </div>
+          <p class="live"><i></i>Leche, café y bollería</p>
+        </div>
+        <div class="legend">
+          <button type="button" class="legend-btn" data-level="verde" aria-pressed="false"><i class="dot verde"></i>Verde · sin alerta</button>
+          <button type="button" class="legend-btn" data-level="amarillo" aria-pressed="false"><i class="dot amarillo"></i>Amarillo · atención</button>
+          <button type="button" class="legend-btn" data-level="rojo" aria-pressed="false"><i class="dot rojo"></i>Rojo · revisar primero</button>
+        </div>
+        <div class="table-scroll">
+          <div class="table-head products-head">
+            <span>Franja</span>
+            <span>Leche entera</span>
+            <span>Café en grano</span>
+            <span>Bollería</span>
+          </div>
+          <div id="products" class="rows"></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="banner" id="banner">
+      <div class="banner-count" id="banner-count">—</div>
+      <div>
+        <h2 id="banner-slot">Calculando la jornada</h2>
+        <p id="banner-text" aria-live="polite">El modelo SARIMAX está estimando los clientes de mañana a partir del histórico de la tienda.</p>
+        <p class="confirm">Confirma el stock y el personal disponible antes de actuar.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
